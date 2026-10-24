@@ -5,16 +5,20 @@ namespace LocalImageGeneratorAI.Web.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
 
-        public IndexModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
+        [BindProperty]
+        public string Prompt { get; set; } = string.Empty;
+
+        public string? SubmittedPrompt { get; set; }
+
 
         public void OnGet()
         {
 
         }
+
+        public void OnPost()
+        { SubmittedPrompt = Prompt; }
+
     }
 }
