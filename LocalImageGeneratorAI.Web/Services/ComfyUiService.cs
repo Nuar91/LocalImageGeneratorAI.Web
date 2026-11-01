@@ -103,5 +103,38 @@ namespace LocalImageGeneratorAI.Web.Services
 
             return result;
         }
+
+        public async Task<byte[]> GetImageAsync( string filename, string subfolder,string type)
+        {
+            string url =
+                $"view?filename={Uri.EscapeDataString(filename)}" +
+                $"&subfolder={Uri.EscapeDataString(subfolder)}" +
+                $"&type={Uri.EscapeDataString(type)}";
+
+            HttpResponseMessage response = await _httpClient.GetAsync(url);
+
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadAsByteArrayAsync();
+        }
+
+
+
+        public async Task<JsonNode> GetHistoryAsync(string promptId)
+        {
+            HttpResponseMessage response = await _httpClient.GetAsync(
+                $"history/{Uri.EscapeDataString(promptId)}"
+            );
+
+            response.EnsureSuccessStatusCode();
+
+            string json = await response.Content.ReadAsStringAsync();
+
+            return JsonNode.Parse(json)
+                ?? throw new InvalidOperationException(
+                    "ComfyUI returned an empty history response."
+                );
+        }
+
     }
 }

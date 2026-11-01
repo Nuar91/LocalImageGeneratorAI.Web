@@ -40,4 +40,19 @@
         </div>
     }
  
+    @if (!string.IsNullOrEmpty(Model.PromptId))
+    {
+        <p>Prompt ID: @Model.PromptId</p>
+    }
+
+    @if (!string.IsNullOrEmpty(Model.GeneratedImageUrl))
+    {
+        <h2>Generated Image</h2>
+
+        <img src="@Model.GeneratedImageUrl"
+             alt="Generated image"
+             style="max-width: 100%; height: auto;" />
+    }
+
+
 </div>
