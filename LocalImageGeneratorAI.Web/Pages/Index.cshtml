@@ -10,7 +10,7 @@
 
     <form method="post">
         <div class="mb-3">
-            <label for="prompt" class="form-label">Your prompt</label>
+           
             <textarea id="prompt"
                       name="Prompt"
                       class="form-control"
@@ -22,13 +22,22 @@
             Generate Image
         </button>
     </form>
-   
-   @*  @if (!string.IsNullOrWhiteSpace(Model.SubmittedPrompt))
+
+
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger mt-4">
+            @Model.ErrorMessage
+        </div>
+    }
+
+
+     @if (!string.IsNullOrWhiteSpace(Model.SubmittedPrompt))
     {
         <div class="alert alert-success mt-4">
             <strong>Your prompt:</strong>
             <p class="mb-0">@Model.SubmittedPrompt</p>
         </div>
     }
- *@
+ 
 </div>
